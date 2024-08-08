@@ -270,9 +270,9 @@ unsafeStaticPolicyWithOptions options p app req callback =
       readHeader header =
           lookup header $ requestHeaders req
       checkNotModified fm modSince etag =
-          or [ Just (fm_lastModified fm) == modSince
-             , Just (fm_etag fm) == etag
-             ]
+          and [ Just (fm_lastModified fm) == modSince
+              , Just (fm_etag fm) == etag
+              ]
       computeHeaders fm cs =
           case cs of
             NoCaching -> []
